@@ -1,0 +1,4 @@
+private app name : shafi
+api key: 7f138eeec3dd290b075fa0252055c359
+pass: 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
+shared secret: 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
