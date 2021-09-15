@@ -1,12 +1,11 @@
 <section class="inner-hero-section">
     {% if section.settings.image != blank %}
-        <img src="{{ section.settings.image | image_url }}" alt="">
+        <img src="{{ section.settings.image | image_url }}" alt="" >
     {% else %}
         {% capture current %}{% cycle 1, 2 %}{% endcapture %}
         {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
     {% endif %}
-    
-    <div class="container py-5">
+    <div class="container py-5 hero-content">
         <div class="row">
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h1>{{ section.settings.title }}</h1>
