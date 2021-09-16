@@ -20,6 +20,7 @@
     <main role="main">
       {{ content_for_layout }}
     </main>
-     <script src="{{ 'bootstrap.min.js' | asset_url }}" defer></script>
+    
+    {% section 'footer-section' %}
   </body>
 </html>
