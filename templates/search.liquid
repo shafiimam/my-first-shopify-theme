@@ -1,22 +1,66 @@
 {% paginate search.results by 10 %}
-  <form action="/search" method="get" role="search">
-    <input type="search" name="q" value="{{ search.terms | escape }}">
-    <button type="submit">search</button>
-  </form>
-
-  {% if search.performed %}
-    {% for item in search.results %}
-      {% if item.featured_image %}
-        <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-          {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
-        </a>
+  <div class="container">
+    <div class="row">
+      <form action="/search" method="get" role="search">
+        <input class="form-control mb-4 rounded-0 form-control-lg mt-2" type="search" name="q" value="{{ search.terms | escape }}">
+        <div class="form-check-inline">
+          <input class="form-check-input " type="checkbox" name="type" id="product_type" value="product">
+          <label for="product_type" class="form-check-label">Product</label>
+        </div>
+        <div class="form-check-inline">
+          <input class="form-check-input" type="checkbox" name="type" id="article_type" value="article">
+          <label for="article_type" class="form-check-label">Article</label>
+        </div>
+        <div class="form-check-inline"> 
+          <input class="form-check-input" type="checkbox" name="type" id="page_type" value="page">
+          <label for="page_type" class="form-check-label">Page</label>
+        </div>
+        <button class="btn btn-primary mb-2" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="row">
+      <h1 class="text-center">{{ search.results_count}} search result{% if  search.results_count > 1 %}s{% endif %} </h1>
+    </div>
+    <div class="row row-cols-3 g-2 my-5">
+      {% if search.performed %}
+      {% for item in search.results %}
+      {% if item.object_type == 'product' %}
+        <div class="col">
+          <div class="card shadow">
+              {% if item.image %}
+              <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+                {{ item.image.src | img_url: 'medium' | img_tag: item.image.alt, 'card-img-top' }}
+              </a>
+              {% endif %}
+            <div class="card-body">
+              <h5>{{ item.title | link_to: item.url }}</h5>
+              <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+            </div>
+          </div>
+        </div>  
+      {% else if item.object_type == 'article' %}
+        <div class="col">
+          <div class="card shadow">
+              {% if item.image %}
+              <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+                {{ item.image.src | img_url: 'medium' | img_tag: item.image.alt, 'card-img-top' }}
+              </a>
+              {% endif %}
+            <div class="card-body">
+              <h5>{{ item.title | link_to: item.url }}</h5>
+              <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+            </div>
+          </div>
+        </div>  
       {% endif %}
-      <h5>{{ item.title | link_to: item.url }}</h5>
-      <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
-    {% else %}
-      no results
-    {% endfor %}
-  {% endif %}
-
-  {% if paginate.pages > 1 %}{{ paginate | default_pagination }}{% endif %}
+      
+      {% else %}
+        no results
+      {% endfor %}
+    {% endif %} 
+    </div>
+  </div>  
+  <div class="row">
+    {% render 'pagination' , paginate: paginate %}
+  </div>
 {% endpaginate %}
