@@ -1,6 +1,6 @@
 {% if cart.item_count > 0 %}
   <div class="container">
-    <h1 class='py-3 text-center'>cart</h1>
+    <h1 class='py-3 text-center'>{{ 'general.cart.title' | t}}</h1>
     <div class="my-5">
       <form action="/cart" method="post" novalidate class="row">
         <div class="col-12 col-md-8">
@@ -60,7 +60,7 @@
     </div>
   </div>
   {% else %}
-  <h2>cart</h2>
+  <h2>{{ 'general.cart.title' | t }}</h2>
   Cart is empty
 
 {% endif %}

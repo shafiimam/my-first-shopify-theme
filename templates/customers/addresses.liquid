@@ -1,39 +1,89 @@
-<!-- /templates/customers/addresses.liquid -->
+<div class="container my-5">
+    <h1 class="lead">My Addresses</h1>
+    <button class="btn btn-primary rounded-0" data-bs-toggle="modal" data-bs-target="#newAddressModal">
+        Create New Address
+    </button>
+    <div class="row row-cols-md-4 row-cols-1 my-5 gx-2">
+        {% for address in customer.addresses %}
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        {{address| format_address}}
+                    </div>
+                    <div class="card-footer">
+                        <form action="/account/addresses/{{address.id}}" method="post" data-confirm-message="Delete Address?" >
+                            <input type="hidden" name="_method" value="delete" />
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 
-<h2>New Address</h2>
-{% form 'customer_address', customer.new_address %}
+<div class="modal fade" id="newAddressModal" tabindex="-1" aria-labelledby="newAddressModal" aria-hidden="true">
+    {% form 'customer_address', customer.new_address %}
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id='newAddressModal'>Add New Address</h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-12 mb-3">
+                        <label for="AddressFirstNameNew" class="form-label">First Name</label>
+                        <input id="AddressFirstNameNew" class="form-control" type="text" name="address[first_name]" value="{{ form.first_name }}">
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="AddressLastNameNew" class="form-label">Last Name</label>
+                        <input id="AddressLastNameNew" class="form-control" type="text" name="address[last_name]" value="{{ form.last_name }}">
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="AddressCompanyNew" class="form-label">Company</label>
+                        <input id="AddressCompanyNew" class="form-control" type="text" name="address[company]" value="{{ form.company }}">
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="AddressAddress1New" class="form-label">Address</label>
+                        <input id="AddressAddress1New" class="form-control" type="text" name="address[address1]" value="{{ form.address1 }}">
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label  for="AddressAddress2New" class="form-label">Apartment,Suite,etc</label>
+                        <input id="AddressAddress2New" class="form-control" type="text" name="address[address2]" value="{{ form.address2 }}">
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4 mb-3">
+                            <label for="AddressCityNew" class="form-label">City</label>
+                            <input id="AddressCityNew" class="form-control" type="text" name="address[city]" value="{{ form.city }}">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="AddressCountryNew" class="form-label">Country</label>
+                            <select id="AddressCountryNew" class="form-control"  name="address[country]">
+                               {{ all_country_option_tags }} 
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="AddressProvinceNew" class="form-label" disabled="disabled">Province</label>
+                            <select id="AddressProvinceNew" class="form-control" type="text" name="address[province]">
 
-{{ form.errors | default_errors }}
-
-<label for="first_name">First Name</label>
-<input type="text" value="" name="address[first_name]" size="30" />
-
-<label for="last_name">Last Name</label>
-<input type="text" value="" name="address[last_name]" size="30" />
-
-<label for="company">Company</label>
-<input type="text" value="" name="address[company]" />
-
-<label for="address1">Address 1</label>
-<input type="text" value="" name="address[address1]" />
-
-<label for="address2">Address 2</label>
-<input type="text" value="" name="address[address2]" />
-
-<label for="city">City</label>
-<input type="text" value="" name="address[city]" />
-
-<!-- See docs for @shopify/theme-addresses to support Country and Province -->
-<label for="country">Country</label>
-<select name="address[country]" /></select>
-
-<label for="province">Province</label>
-<select name="address[province]" /></select>
-
-<label for="zip">Zip/Post Code</label>
-<input type="text" value="" name="address[zip]" />
-
-<label for="phone">Phone Number</label>
-<input type="tel" value="" name="address[phone]" />
-
-{% endform %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="AddressZipNew" class="form-label">Zip Code</label>
+                        <input id="AddressZipNew" class="form-control" type="text" name="address[zip]" value="{{ form.zip }}">
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="AddressPhoneNew" class="form-label">Phone</label>
+                        <input id="AddressPhoneNew" class="form-control" type="text" name="address[phone]" value="{{ form.phone }}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">
+                        Create Address
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% endform %}
+</div>

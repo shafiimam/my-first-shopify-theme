@@ -4,7 +4,7 @@
     {% for product in collections[section.settings.featured_collection].products %}
         {% assign image = product.featured_image %}
         <div class="col">
-            <div class="card p-2 m-1" style="width: 18rem; ">
+            <div class="card p-2 mx-3" style="width: 18rem; ">
                 {% if image != blank %}
                     <img src="{{ image | img_url : 'medium' }}" alt="" class="card-image-top img-fluid">
                     {% else %}
