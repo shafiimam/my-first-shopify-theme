@@ -1,29 +1,41 @@
 // Put your application javascript here
-if(document.getElementById('sort_by') != null){
-    document.querySelector('#sort_by').addEventListener('change', function(e){
-        let url = new URL(window.location.href);
-        url.searchParams.set('sort_by', e.currentTarget.value);
-        window.location.href = url.href;
+if (document.getElementById('sort_by') != null) {
+  document.querySelector('#sort_by').addEventListener('change', function (e) {
+    let url = new URL(window.location.href);
+    url.searchParams.set('sort_by', e.currentTarget.value);
+    window.location.href = url.href;
+  });
+}
+
+if (document.getElementById('AddressCountryNew') != null) {
+  document
+    .getElementById('AddressCountryNew')
+    .addEventListener('change', function (e) {
+      let provinces =
+        this.options[this.selectedIndex].getAttribute('data-provinces');
+      let provinceSelector = document.getElementById('AddressProvinceNew');
+      let provinceArray = JSON.parse(provinces);
+      console.log(provinceArray);
+      if (provinceArray.length < 1) {
+        provinceSelector.setAttribute('disabled', 'disabled');
+      } else {
+        provinceSelector.removeAttribute('disabled');
+      }
+      provinceSelector.innerHTML = ``;
+      var options = ``;
+      for (let i = 0; i < provinceArray.length; i++) {
+        options += `<option value="${provinceArray[i][0]}">${provinceArray[i][0]}</option>`;
+      }
+      provinceSelector.innerHTML = options;
     });
 }
 
-if(document.getElementById('AddressCountryNew') != null){
-    document.getElementById('AddressCountryNew').addEventListener('change', function(e){
-        let provinces = this.options[this.selectedIndex].getAttribute('data-provinces');
-        let provinceSelector = document.getElementById('AddressProvinceNew');
-        let provinceArray = JSON.parse(provinces);
-        console.log(provinceArray);
-        if(provinceArray.length < 1){
-            provinceSelector.setAttribute('disabled', 'disabled')
-        }
-        else{
-            provinceSelector.removeAttribute('disabled',);
-        }
-        provinceSelector.innerHTML = ``;
-        var options = ``;
-        for (let i = 0; i < provinceArray.length; i++) {
-           options += `<option value="${provinceArray[i][0]}">${provinceArray[i][0]}</option>` 
-        }
-        provinceSelector.innerHTML = options;
+if (document.getElementById('forgetPassword') != null) {
+  document
+    .getElementById('forgetPassword')
+    .addEventListener('click', function (e) {
+      document.getElementById('forgetPasswordForm').classList.remove('d-none');
+      document.getElementById('forgetPasswordForm').classList.add('d-block');
+      console.log('clicked');
     });
 }

@@ -1,7 +1,7 @@
 <div class="container py-5 my-5">
     <div class="login-form">
         {% form 'customer_login' %}
-        {% render 'form-error', form:form %}
+        {% render 'form-error', form: form %}
             <h1 class="h3">Customer Login</h1>
             <label for="emailAddress">Email Address</label>
             <input type="email" name="customer[email]" class="form-control rounded-0">
@@ -9,6 +9,17 @@
             <input type="password" name="customer[password]" class="form-control rounded-0">
             <input type="submit" value="Sign In" class="btn btn-primary btn-lg my-2 w-100 rounded-0" >
         {% endform %}
+        <a href="#recover" id="forgetPassword" class="text-center">Forgot your password?</a>
     </div>
-    
+    <div class="d-none forget-password-form login-form" id="forgetPasswordForm">
+        {% form 'recover_customer_password' %}
+            {% render 'form-error', form: form %}
+            
+            <div class="col-12">
+                <label for="resetPassword">Email Address</label>
+                <input class="form-control" type="email" name="email" id="resetPassword">
+            </div>
+            <input class="btn btn-info w-100 rounded-0 my-2" type="submit" value="Reset Password">
+        {% endform %}
+    </div>
 </div>
