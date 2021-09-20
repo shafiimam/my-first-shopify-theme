@@ -4,8 +4,14 @@
         "title": "Pas trouvé",
         "subtext_html": "La page que vous cherchiez n'existe pas"
       },
-      "cart": {
-        "title" : "Cart"
+      "Cart": {
+        "title" : "Panier"
+      },
+      "Layout" : {
+        "login_text" : "Compte",
+        "logout_text": "Logout",
+        "register_text" : "Creer un compte",
+        "account_text" : "User"
       }
     }
   }

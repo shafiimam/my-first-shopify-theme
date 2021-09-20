@@ -25,11 +25,12 @@
     <div class="col-3 g-2">
       <div class="card p-2 m-2" style="width: 18rem">
         {% if image != blank %}
-        <img
+        <a href="#" id="productInfoAnchor" product-handle="{{ product.handle }}" product-price="{{ product.price | money_without_trailing_zeros}}">
+          <img
           src="{{ image | img_url: 'medium' }}"
           alt=""
-          class="card-image-top img-fluid"
-        />
+          class="card-image-top img-fluid"/>
+        </a>
         {% else %}
         {{ "product-1" | placeholder_svg_tag: "card-image-top img-fluid" }}
         {% endif %}
@@ -49,4 +50,34 @@
   {% render 'pagination', paginate: paginate %}
   
   {% endpaginate %}
+</div>
+
+<div class="modal fade" id="productInfoModal" tabindex="-1" role="dialog" aria-hidden="true">  
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <img class='img-fluid' src="" id="product-info-image" alt="">
+          </div>
+          <div class="col-12 col-md-6">
+            <h1 id="product-info-title"></h1>
+            <h3 id="product-info-price"></h3>
+            <p id="product-info-description"></p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <form action="#" class="row" id="addToCartForm">
+          <select name="id" id="modalItemId" class='col-auto'>
+          </select>
+          <input id="modalProductQuantity" type="number" name="quantity" value="1" min="1" class="col-auto">
+          <button type="submit" class="btn btn-success col-auto">Add To Cart</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

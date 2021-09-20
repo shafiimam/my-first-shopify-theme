@@ -26,7 +26,7 @@
             {% endif %} 
         {% endfor %}
         <li class="nav-item">
-          <a class="nav-link" href="/cart">cart</a>
+          <a class="nav-link" href="/cart">cart <span class="badge bg-danger rounded-pill" id="cart-badge">0</span></a>
         </li>
       </ul>
       <ul class="navbar-nav">
@@ -49,11 +49,19 @@
         {% endif %}
       </ul>
       <form action="/search" method="GET" role="search">
-        <input type="search" name="q" id="" value="{{ search.terms | escape }}" placeholder="search">
+        <input type="search" name="q" id="searchInputField" value="{{ search.terms | escape }}" placeholder="search">
       </form>
     </div>
   </div>
 </nav>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasSearchResults" aria-labelledby="offcanvasLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasLabel">Product Search Results</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body" id="search-results-body">
+  </div>
+</div>
 
 {% schema %}
   {

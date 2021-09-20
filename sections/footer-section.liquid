@@ -1,10 +1,10 @@
 <footer class="footer-section bg-light py-5 mt-5">
-    <div class="container">
-        <div class="row row-cols-{{ section.settings.col_num }}">
+    <div class="container p-4">
+        <div class="row row-cols-md-{{ section.settings.col_num }} row-cols-1">
             {% for block in section.blocks %}
                 {% assign item = block.settings %}
                 {% if block.type == "link_list" %}
-                    <div class="col">
+                    <div class="col g-2">
                         <h5>{{ item.title }}</h5>
                         {% assign footer_linklist = item.menu%}
                         <ul class="list-unstyled text-small">
@@ -14,7 +14,7 @@
                         </ul>
                     </div>
                 {% else if block.type == 'text'%}
-                    <div class="col">
+                    <div class="col g-2">
                         <img src="{{ item.logo | img_url: 'medium' }}" class="mb-5">
                         <h5>{{ item.title}}</h5>
                         <p>{{ item.description }}</p>
@@ -23,6 +23,13 @@
             {% endfor %}
         </div>
     </div>
+   {% if section.settings.enable_payment_icons %}
+        <div class="container d-flex justify-content-center">
+            {% for payment_type in shop.enabled_payment_types %}
+                <img src="{{ payment_type | payment_type_img_url }}" alt="">
+            {% endfor %}
+        </div>
+   {% endif %}
 </footer>
 
 
@@ -40,6 +47,12 @@
             "min": 2,
             "max": 4,
             "label": "Number Of Columns"
+        },
+        {
+            "type": "checkbox",
+            "id" : "enable_payment_icons",
+            "default": true,
+            "label": "Enable Payment Icons"
         }
     ],
     "max_blocks": 4,

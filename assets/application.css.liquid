@@ -15,6 +15,9 @@ html, body {
     top: 0;
     bottom: 0;
     width: 100vw;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
     z-index: -1;
 }
 .hero-content {
@@ -35,16 +38,11 @@ html, body {
 }
 
 .localBtn {
-    position: absolute;
-    background-color: #3298d8;
-    color: #fff;
+    position: fixed;
     padding: 6px;
     font-size:20px;
-    bottom: 25px;
+    bottom: 60px;
     right: 25px;
-    border-radius: 50%;
-    max-width: 70px;
-    max-height: 70px;
     box-shadow: -1px 0px 20px 0px #00000066;
 }
 .localBtn img{
@@ -63,4 +61,19 @@ html, body {
 
 .drop_up:hover .dropup-content {
     display: block;
+}
+.dropup-content a {
+    color: #000;
+    font-size: 17px;
+    padding: 15px 10px;
+    display: block;
+    text-align: center;
+}
+
+#shopify-section-translation{
+    position: fixed;
+}
+
+.feature-collection-section .card {
+    z-index: -1;
 }
