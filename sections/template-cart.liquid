@@ -1,0 +1,94 @@
+<div class="container-my5">
+    {% if cart.item_count > 0 %}
+        <h1 class='py-3 text-center'>{{ 'general.cart.title' | t}}</h1>
+        <div class="my-5">
+          <form action="/cart" method="post" novalidate class="row">
+            <div class="col-12 col-md-8">
+              <div class="card shadow">
+                <div class="card-body">
+                  <table class='table table-borderless'>
+                    <thead>
+                      <th colspan="2">Product</th>
+                      <th>Price</th>
+                      <th>Qty</th>
+                      <th>total</th>
+                    </thead>
+                    <tbody>
+                      {% for item in cart.items %}
+                        <tr>
+                          <td>
+                            <a href="{{ item.url | within: collections.all }}">
+                              <img src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}" loading='lazy'>
+                            </a>
+                          </td>
+                          <td>
+                            <a href="{{ item.url }}">{{ item.product.title }}</a>
+                           <p class="small"> {{ item.variant.title }}</p>
+                            <br>
+                            <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">remove</a>
+                          </td>
+                          <td>{{ item.price | money }}</td>
+                          <td>
+                            <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0" loading='lazy'>
+                          </td>
+                          <td>
+                            {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money_without_trailing_zeros }}{% endif %}
+                            {{ item.line_price | money }}
+                            {% for discount in item.discounts %}{{ discount.title }}{% endfor %}
+                          </td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+               
+              <div class='card shadow'>
+                <div class="card-body">
+                    {% for block in section.blocks %}
+                    {% case block.type %}
+                        {% when 'cart_total' %}
+                            <div class="cart-total-block">
+                                <p class="h3">The total amount is</p>
+                                <p>{{ cart.total_price | money }}</p>
+                            </div>
+                        {% when 'cart_checkout_button' %}
+                            <div class="cart-checkout-buttons d-grid gap-2">
+                                <button class='btn btn-primary' type="submit" name="update">Update</button>
+                                <button class='btn btn-primary' type="submit" name="checkout">Checkout</button>
+                            </div>
+                        {% else %}
+                    {% endcase %}
+                {% endfor %} 
+                </div>
+              </div>
+            </div>
+          </form>
+          
+        </div>
+      {% else %}
+        <h2 class="text-center">{{ 'general.cart.title' | t }}</h2>
+        <p class="text-center">Cart is empty</p>
+    {% endif %}
+  </div>
+  
+{% schema %}
+{
+    "name": "Template Cart",
+    "tag": "section",
+    "blocks": [
+    {
+        "type": "cart_total",
+        "name": "Cart Total",
+        "limit": 1
+    },
+    {
+        "type": "cart_checkout_button",
+        "name": "Cart Buttons",
+        "limit": 1
+    }
+]
+}
+{% endschema %}

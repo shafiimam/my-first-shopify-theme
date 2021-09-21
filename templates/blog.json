@@ -1,0 +1,20 @@
+{
+    "sections":{
+        "template": {
+            "type": "template-blog",
+            "blocks": {
+                "blog_title": {
+                    "type": "blog_title"
+                },
+                "blog_grid": {
+                    "type": "blog_grid"
+                },
+                "block_pagination": {
+                    "type": "block_pagination"
+                }
+            },
+            "block_order": ["blog_title","block_grid","block_pagination"]
+        }
+    },
+    "order": ["template"]
+}

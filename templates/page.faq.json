@@ -1,0 +1,18 @@
+{
+    "sections":{
+        "template":{
+            "type":"template-page-faq",
+            "blocks": {
+                "new-faq-item":{
+                    "type": "faq",
+                    "settings": {
+                        "title": "",
+                        "answer": ""
+                    }
+                }
+            },
+            "block_order": ["new-faq-item"]
+        }
+    },
+    "order": ["template"]
+}

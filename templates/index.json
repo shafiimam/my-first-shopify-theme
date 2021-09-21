@@ -1,0 +1,23 @@
+{
+    "sections":{
+        "hero":{
+            "type": "hero",
+            "settings":{
+                "image": "",
+                "title": "Welcome to gears4coders",
+                "description": "<p>we are happy to  welcome you to out store</p>",
+                "button_label": "Shop Now",
+                "button_link": ""
+            }
+        },
+        "featured-collection": {
+            "type": "featured-collection",
+            "settings":{
+                "featured_collection": "frontpage",
+                "title": "Welcome to gears4coders"
+            }
+        }
+        
+    },
+    "order": ["hero", "featured-collection"]
+}

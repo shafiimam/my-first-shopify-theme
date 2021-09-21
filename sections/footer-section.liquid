@@ -6,7 +6,7 @@
                 {% if block.type == "link_list" %}
                     <div class="col g-2">
                         <h5>{{ item.title }}</h5>
-                        {% assign footer_linklist = item.menu%}
+                        {% assign footer_linklist = item.menu %}
                         <ul class="list-unstyled text-small">
                             {% for link in linklists[footer_linklist].links %}
                                 <li><a href="{{ link.url }}}">{{ link.title | escape}}</a></li>
@@ -16,7 +16,7 @@
                 {% else if block.type == 'text'%}
                     <div class="col g-2">
                         <img src="{{ item.logo | img_url: 'medium' }}" class="mb-5">
-                        <h5>{{ item.title}}</h5>
+                        <h5>{{ item.title }}</h5>
                         <p>{{ item.description }}</p>
                     </div>
                 {% endif %}
